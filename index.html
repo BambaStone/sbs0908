@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/7156c50ef7.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@700;800&display=swap" rel="stylesheet">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-size: 18px;
+            font-family: 'Nanum Gothic', sans-serif;
+        }
+        #body{
+            background: #555;
+        }
+        #wrapper{
+            width: 100%;
+            position: relative;
+        }
+
+        header{
+            height: 150px;
+            width: 100%;
+            background: white;
+            position: relative;
+        }
+
+        #menubar{
+            margin: 0 auto;
+            background: #DDD;
+            height: 150px;
+            width: 1200px;
+            position: relative;
+        }
+
+        #topright{
+            height: 20px;
+            width: 375px;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        #topright>a{
+            float: left;
+            text-decoration: none;
+            font-size: 18px;
+            color: #555;
+            outline: none;
+        }
+        #topright>a:hover{
+            color: black;
+        }
+        #topright>p{
+            float: left;
+            font-size: 18px;
+            margin-left: 10px;
+            margin-right: 10px;
+            color: #555;
+        }
+
+
+        #logo{
+            width: 200px;
+            height: 60px;
+            position: absolute;
+            display: block;
+            background: #999;
+            top: 65px;
+            left: 20px;
+        }
+
+        #menuleft{
+            height: 60px;
+            width: 700px;
+            position: absolute;
+            display: block;
+            background: #bbb;
+            top: 65px;
+            left: 220px;
+        }
+
+        #menuleft>input[type="radio"]{
+            display: none;
+        }
+
+        .menulabel{
+            color: black;
+            display: inline-block;
+            text-align: center;
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+            margin-left: 40px;
+            font-size: 20px;
+            font-weight: 800;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        #menuleft>input[type="radio"]:checked +label{
+            color: rgb(0,207,188);
+        }
+
+        #menuright{
+            height: 60px;
+            width: 150px;
+            position: absolute;
+            display: block;
+            background: #bbb;
+            top: 65px;
+            right: 20px;
+        }
+
+        #menuright>#searchbtn{
+            display: none;
+        }
+        #menuright>a{
+            color: black;
+            text-decoration: none;
+        }
+        #menuright>a>i,#menuright>label>i{
+            font-size: 30px;
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+            text-align: center;
+            width: 50px;
+            float: right;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+        #menuright>#searchbtn:checked +label{
+            color: rgb(0,207,188);
+        }
+
+        #searchbox{
+            width: 0px;
+            height: 0px;
+            background: #aaa;
+            position: absolute;
+            display: block;
+            top: 0;
+            right: -20px;
+            opacity: 0;
+            transition: 0.3s;
+            z-index: 9999;
+            overflow: hidden;
+        }
+        #menuright>#searchbtn:checked ~ #searchbox{
+            opacity: 1;
+            width: 1200px;
+            height: 800px;
+        }
+        #searchbox>h1{
+            font-size: 35px;
+            font-weight: 800;
+            position: absolute;
+            top: 50px;
+            left: 50px;
+        }
+        #searchclose{
+            border: none;
+            outline: none;
+            position: absolute;
+            right: 35px;
+            top: 10px;
+            background: none;
+            cursor: pointer;
+        }
+        #searchclose>i{
+            font-size: 40px;
+        }
+        #searchbar{
+            width: 1100px;
+            height: 60px;
+            display: block;
+            position: absolute;
+            top: 140px;
+            left: 50px;
+            background: rgb(224,224,224);
+        }
+        #searchbar>input[type="search"]{
+            width: 1100px;
+            height: 60px;
+            display: block;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            padding: 15px;
+            
+            background: rgb(224,224,224);
+            border: none;
+            outline: none;
+            
+        }
+        #searchbar>i{
+            position: absolute;
+            top: 15px;
+            left: 1060px;
+            font-size: 30px;
+            pointer-events: none;
+        }
+
+        #hotsearch{
+            width: 600px;
+            height: 550px;
+            position: absolute;
+            display: block;
+            left: 0;
+            bottom: 0;
+            padding-left: 100px;
+        }
+        #hotsearch>ul>li>input[type="radio"]{
+            display: none;
+        }
+        #hotsearch>ul{
+            list-style: none;
+        }
+        #hotsearch>ul>li>input[type="radio"]:checked+label{
+            color: black;
+            border-bottom: 4px solid black;
+        }
+        #hotsearch>ul>li>input[type="radio"]:checked~.hotsearchbox{
+            display: block;
+        }
+        .searchlabel{
+            font-size: 25px;
+            float: left;
+            width: 150px;
+            text-align: center;
+            font-weight: 800;
+            color: #555;
+            height: 50px;
+            padding-top: 10px;
+            cursor: pointer;
+            margin-left: 30px;
+            margin-right: 30px;
+            transition: 0.3s;
+        }
+        .hotsearchbox{
+            width: 600px;
+            height: 500px;
+            position: absolute;
+            display: none;
+            left: 0;
+            bottom: 0;
+        }
+        .hotsearchbox>ol{
+            margin-left: 80px;
+            margin-top: 30px;
+        }
+        .hotsearchbox>ol>li{
+            margin-top: 20px;
+            padding-left: 10px;
+        }
+        .hotsearchbox>ol>li:nth-child(1),
+        .hotsearchbox>ol>li:nth-child(2),
+        .hotsearchbox>ol>li:nth-child(3)
+        {
+            color: rgb(0,207,188);   
+        }
+        .hotsearchbox>ol>li>a{
+            font-size: 18px;
+            text-decoration: none;
+            font-weight: 700;
+            color: black;
+        }
+
+        #recentsearch{
+            width: 600px;
+            height: 550px;
+            position: absolute;
+            display: block;
+            right: 0;
+            bottom: 0;
+            background: blue;
+        }
+
+        iframe{
+            width: 100%;    
+        }
+
+    </style>
+    <script>
+
+        function searchclosebtn(){
+            document.getElementById("searchbtn").checked=false;
+        }
+
+        function resize(ifr){
+            ifr.style.height=ifr.contentDocument.body.scrollHeight+'px';
+        }
+
+        function homesite(){
+            frames["mains"].location.href='0829-003.html';
+        }
+        function mzsite(){
+            frames["mains"].location.href='0905-001.html';
+        }
+        function Overseassite(){
+            frames["mains"].location.href='0829-003.html';
+        }
+        function domesticsite(){
+            frames["mains"].location.href='0905-001.html';
+        }
+        function themesite(){
+            frames["mains"].location.href='0829-003.html';
+        }
+        function airportssite(){
+            frames["mains"].location.href='0905-001.html';
+        }
+        function hotelssite(){
+            frames["mains"].location.href='0829-003.html';
+        }
+    </script>
+</head>
+<body>
+    <div id="wrapper">
+        <header>
+            <div id="menubar">
+                <div id="topright">
+                    <a href="#login" id="login">로그인</a>
+                    <p>|</p>
+                    <a href="#signup" id="signup">회원가입</a>
+                    <p>|</p>
+                    <a href="#pay" id="pay">예약확인/결제</a>
+                    <p>|</p>
+                    <a href="#Service" id="Service">고객센터</a>
+                </div>
+                <a href="0905-001.html" id="logo" target="mains"></a>
+                <div id="menuleft">
+
+                    <input type="radio" name="menul" id="Overseas" onclick="Overseassite()">
+                    <label for="Overseas" class="menulabel">
+                        해외여행
+                    </label>
+
+                    <input type="radio" name="menul" id="domestic" onclick="domesticsite()">
+                    <label for="domestic" class="menulabel">
+                        국내여행
+                    </label>
+
+                    <input type="radio" name="menul" id="theme" onclick="themesite()">
+                    <label for="theme" class="menulabel">
+                        테마여행
+                    </label>
+
+                    <input type="radio" name="menul" id="mz" onclick="mzsite()">
+                    <label for="mz" class="menulabel">
+                        MZ투어
+                    </label>
+
+                    <input type="radio" name="menul" id="airports" onclick="airportssite()">
+                    <label for="airports" class="menulabel">
+                        항공
+                    </label>
+
+                    <input type="radio" name="menul" id="hotels" onclick="hotelssite()">
+                    <label for="hotels" class="menulabel">
+                        호텔
+                    </label>
+
+                    <input type="radio" name="menul" id="home" checked onclick="homesite()">
+                    <label for="home" class="menulabel">
+                    </label>
+
+                </div>
+                <div id="menuright">
+                    <input type="checkbox" name="searchbtn" id="searchbtn">
+                    <label for="searchbtn">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </label>
+                    <div id="searchbox">
+                        <h1>어디로 떠나세요?</h1>
+                        <div id="searchbar">
+                            <input type="search" placeholder="검색어를 입력하세요.">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </div>
+                        <button id="searchclose" onclick="searchclosebtn()"><i class="fa-solid fa-xmark"></i></button>
+                        <div id="recentsearch">
+                            <p>최근검색어</p>
+                            <ul>
+                                <li><a href="#">text</a></li>
+                                <li><a href="#">text</a></li>
+                                <li><a href="#">text</a></li>
+                            </ul>
+                        </div>
+                        <div id="hotsearch">
+                            <ul>
+
+                                <li>
+                                    <input type="radio" name="hotsearchlist" id="popular" checked>
+                                    <label for="popular" class="searchlabel">
+                                        인기검색어
+                                    </label>
+                                    <div class="hotsearchbox">
+                                        <ol>
+                                            <li><a href="#">text1</a></li>
+                                            <li><a href="#">text1</a></li>
+                                            <li><a href="#">text1</a></li>
+                                            <li><a href="#">text1</a></li>
+                                            <li><a href="#">text1</a></li>
+                                            <li><a href="#">text1</a></li>
+                                            <li><a href="#">text1</a></li>
+                                            <li><a href="#">text1</a></li>
+                                            <li><a href="#">text1</a></li>
+                                            <li><a href="#">text1</a></li>
+                                        </ol>
+                                    </div>
+                                </li>
+                                
+                                <li>
+                                    <input type="radio" name="hotsearchlist" id="recommend">
+                                    <label for="recommend" class="searchlabel">
+                                        추천검색어
+                                    </label>
+                                    <div class="hotsearchbox">
+                                        <ol>
+                                            <li><a href="#">text2</a></li>
+                                            <li><a href="#">text2</a></li>
+                                            <li><a href="#">text2</a></li>
+                                            <li><a href="#">text2</a></li>
+                                            <li><a href="#">text2</a></li>
+                                            <li><a href="#">text2</a></li>
+                                            <li><a href="#">text2</a></li>
+                                            <li><a href="#">text2</a></li>
+                                            <li><a href="#">text2</a></li>
+                                            <li><a href="#">text2</a></li>
+                                        </ol>
+                                    </div>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+
+                    <a href="#" id="mymenu">
+                        <i class="fa-solid fa-user"></i>
+                    </a>
+                </div>
+            </div>
+        </header>
+        <iframe src="0905-001.html" name="mains" id="mains" scrolling="no" border="no" maginwidth="0" marginheight="0" frameborder="0" onload="resize(this)"></iframe>
+    </div>
+</body>
+</html>

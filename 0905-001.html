@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/7156c50ef7.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@700&display=swap" rel="stylesheet">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-size: 18px;
+            font-family: 'Nanum Gothic', sans-serif;
+        }
+
+        /*콘텐츠1*/
+        #content1{
+            width: 1200px;
+            height: 600px;
+            position: relative;
+            margin: 0 auto;
+            background: rgb(126, 126, 126);
+        }
+
+        #insidebox{
+            width: 450px;
+            height: 450px;
+            position: absolute;
+            right: 75px;
+            top: 75px;
+            background: white;
+        }
+        #insidebox>ul{
+            list-style: none;
+            width: 100%;
+            height: 100%;
+            position: relative;
+            display: inline-block;
+        }
+        #insidebox>ul>li>label{
+            cursor: pointer;
+            font-size: 20px;
+            position: absolute;
+            top: 50px;
+            display: inline-block;
+        }
+        #insidebox>ul>li>label::after{
+            content: "";
+            width: 100%;
+            height: 100%;
+            border-bottom: 3px solid black;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: 0.5s;
+        }
+        .insidecontent{
+            display: none;
+            position: absolute;
+            width: 100%;
+            height: 350px;
+            top: 80px;
+            left: 0;
+            background: rgba(0, 0, 0, 0.425);
+        }
+        #insidebox>h1{
+            display: block;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+        #insidebox>ul>li>input[type="radio"]:checked ~ .insidecontent{
+            display: block;
+        }
+        #insidebox>ul>li>input[type="radio"]:checked +label::after{
+            opacity: 1;
+        }
+        #insidebox>ul>li:nth-child(1)>label{
+            left: 25%;
+            transform: translateX(-50%);
+        }
+        #insidebox>ul>li:nth-child(2)>label{
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        #insidebox>ul>li:nth-child(3)>label{
+            left: 75%;
+            transform: translateX(-50%);
+        }
+        #insidebox>ul>li>input[type="radio"]{
+            display: none;
+        }
+
+        #airbtn,#hotelbtn,#searchbtn{
+            outline: none;
+            border: none;
+            width: 400px;
+            height: 60px;
+            background: rgb(48, 48, 48);
+            position: absolute;
+            left: 25px;
+            bottom: 0px;
+            cursor: pointer;
+            color: white;
+        }
+        
+        /*=====================================================*/
+        /*===================패키지부분=========================*/
+        /*=====================================================*/
+
+        #pakdest{
+            width: 200px;
+            height: 60px;
+            font-size: 25px;
+            position: absolute;
+            top: 20px;
+            left: 25px;
+            border: none;
+            outline: none;
+        }
+        #dests{
+            width: 200px;
+            height: 60px;
+            font-size: 25px;
+            position: absolute;
+            top: 20px;
+            left: 225px;
+            border: none;
+            outline: none;
+        }
+        #goday{
+            width: 400px;
+            height: 60px;
+            font-size: 25px;
+            position: absolute;
+            top: 100px;
+            left: 25px;
+            border: none;
+            outline: none;
+        }
+        /*=====================================================*/
+        /*===================패키지부분=========================*/
+        /*=====================================================*/
+
+        /*=====================================================*/
+        /*=====================항공부분=========================*/
+        /*=====================================================*/
+        #seat{
+            width: 400px;
+            height: 50px;
+            background: white;
+            display: inline-block;
+            position: absolute;
+            left: 25px;
+            bottom: 90px;
+            z-index: 9999;
+        }
+        #seat>#seatbtn{
+            outline: none;
+            border: none;
+            width: 400px;
+            height: 50px;
+            display: inline-block;
+            color: white;
+            background: rgb(48, 48, 48);
+        }
+        #seat>#seatbox{
+            width: 400px;
+            height: 0;
+            background: rgb(151, 151, 151);
+            position: absolute;
+            display: block;
+            top: 50px;
+            left: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: 0.3s;
+        }
+        #seat:hover>#seatbox{
+            height: 420px;
+            opacity: 1;
+        }
+        #seat>#seatbox>div,#seat>#seatbox>h2,#seat>#seatbox>p{
+            display: block;
+            margin-left: 10px;
+            margin-top: 10px;
+        }
+        #seat>#seatbox>input[type="button"]
+        {
+            display: inline-block;
+            position: absolute;
+            bottom: 20px;
+            left: 50px;
+            width: 300px;
+            margin: 0 auto;
+            height: 40px;
+        }
+
+        #airtickets{
+            width: 400px;
+            height: 50px;
+            position: absolute;
+            left: 25px;
+            top: 60px;
+        }
+        #airtickets>input[type="radio"]{
+            display: none;
+        }
+        #airtickets>label{
+            position: absolute;
+            width: 70px;
+            height: 35px;
+            background: rgb(180, 180, 180);
+            border-radius: 15px;
+            box-shadow: 2px 2px 2px black;
+            top: -45px;
+            text-align: center;
+            padding-top: 5px;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        #airtickets>#single+label{
+            left: 80px;
+        }
+        #airtickets>div{
+            width: 0px;
+            height: 50px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            display: inline-block;
+            overflow: hidden;
+            opacity: 0;
+            transition: 0.3s;
+        }
+        #airtickets>div>input[type="date"]{
+            font-size: 25px;
+            width: 130px;
+            height: 50px;
+            position: absolute;
+            top: 0;
+            display: block;
+            border: none;
+            outline: none;
+            border-radius: 25px;
+        }
+        #come{
+            left: 160px;
+        }
+        #airtickets>div>p{
+            font-size: 14px;
+            width: 40px;
+            height: 20px;
+            position: absolute;
+            top: 20px;
+            left: 123px;
+            transform: rotate(90deg);
+        }
+        #airtickets>div>input[type="date"]::-webkit-datetime-edit-year-field{
+            display: none;
+        }
+        #airtickets>div>input[type="date"]::-webkit-datetime-edit-month-field,
+        #airtickets>div>input[type="date"]::-webkit-datetime-edit-day-field{
+            margin-left: 10px;
+        }
+        #airtickets>div>input[type="date"]::-webkit-datetime-edit-text{
+            display: none;
+        }
+        #airtickets>#shuttle:checked ~#shuttledate,
+        #airtickets>#single:checked ~#singledate{
+            width: 400px;
+            opacity: 1;
+        }
+        #airtickets>input[type="radio"]:checked +label{
+            box-shadow: 0px 0px 2px black;
+            transform: translate(2px,2px);
+            background: rgb(129, 129, 129);
+        }
+
+
+        #start,#end{
+            position: absolute;
+            top: 120px;
+        }
+        #start{
+            left: 25px;
+        }
+        #end{
+            left: 200px;
+        }
+        #start>p{
+            font-size: 14px;
+            width: 40px;
+            height: 20px;
+            position: absolute;
+            top: 30px;
+            left: 130px;
+            transform: rotate(90deg);
+        }
+        #start>select,#end>select{
+            display: block;
+            font-size: 20px;
+            height: 40px;
+            margin: 0 auto;
+            width: 130px;
+            text-align: center;
+            margin-top: 0px;
+            border: none;
+            outline: none;
+        }
+        /*=====================================================*/
+        /*=====================항공부분=========================*/
+        /*=====================================================*/
+
+
+        /*=====================================================*/
+        /*=====================호텔부분=========================*/
+        /*=====================================================*/
+
+        #hoteldest{
+            width: 200px;
+            height: 60px;
+            font-size: 25px;
+            position: absolute;
+            top: 20px;
+            left: 25px;
+            border: none;
+            outline: none;
+        }
+        #hoteldests{
+            width: 200px;
+            height: 60px;
+            font-size: 25px;
+            position: absolute;
+            top: 20px;
+            left: 225px;
+            border: none;
+            outline: none;
+        }
+        #hoteldate{
+            width: 400px;
+            height: 60px;
+            background: white;
+            position: absolute;
+            top: 100px;
+            left: 25px;
+        }
+        #hoteldate>input[type="date"]{
+            font-size: 25px;
+            display: inline-block;
+            width: 180px;
+            height: 60px;
+            border: none;
+            outline: none;
+        }
+        #hoteldate>p{
+            font-size: 25px;
+            display: inline-block;
+        }
+        #hoteldate>input[type="date"]::-webkit-datetime-edit-year-field{
+            display: none;
+        }
+        #hoteldate>input[type="date"]::-webkit-datetime-edit-month-field,
+        #hoteldate>input[type="date"]::-webkit-datetime-edit-day-field{
+            margin-left: 10px;
+        }
+        #hoteldate>input[type="date"]::-webkit-datetime-edit-text{
+            display: none;
+        }
+        #room{
+            width: 400px;
+            height: 60px;
+            position: absolute;
+            top: 190px;
+            left: 25px;
+            background: white;
+        }
+        #roombtn{
+            width: 400px;
+            height: 60px;
+            border: none;
+            outline: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: rgb(48, 48, 48);
+            color: white;
+            cursor: pointer;
+        }
+        #roombox{
+            width: 400px;
+            height: 0px;
+            border: 1px solid black;
+            position: absolute;
+            top: 60px;
+            left: 0;
+            background: white;
+            z-index: 9999;
+            opacity: 0;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+        #roombox>div>*{
+            font-size: 20px;
+            margin-top: 10px;
+            margin-left: 10px;
+            width: 80px;
+        }
+        #roombox>p{
+            margin-top: 10px;
+            margin-left: 10px;
+        }
+        #room:hover > #roombox{
+            opacity: 1;
+            height: 230px;
+        }
+        #room>#roombox>input[type="button"]{
+            width: 380px;
+            height: 50px;
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+        }
+        /*=====================================================*/
+        /*=====================호텔부분=========================*/
+        /*=====================================================*/
+
+
+        /*콘텐츠1*/
+    </style>
+    <script>
+        function destcategory(e){
+            var destjp=["도쿄","오키나와","교토"];
+            var destuk=["런던","에든버러","맨체스터","글래스고"];
+            var destus=["LA","뉴욕","샌프란시스코","워싱턴DC","시카고"];
+
+            var target=document.getElementById("dests");
+
+            if(e.value == "jp") var d = destjp;
+            else if(e.value == "uk") var d = destuk;
+            else if(e.value == "us") var d = destus;
+
+            target.options.length=0;
+
+            for(x in d){
+                var opt=document.createElement("option");
+                opt.value=d[x];
+                opt.innerHTML=d[x];
+                target.appendChild(opt);
+            }
+        }
+
+        function seatclick(ad,ki,ba){
+            var target=document.getElementById("seatbtn");
+
+            target.value="";
+            if(ad > 0) target.value=" 성인"+ad+"명 /";
+            if(ki > 0) target.value= target.value+" 소아"+ki+"명 /";
+            if(ba > 0) target.value= target.value+" 유아"+ba+"명 /";
+
+            var lv = document.getElementsByName('seatlv');
+            var ra = Array.from(lv).find(radio => radio.checked);
+            if(ra.value == "normal") target.value= target.value+" 일반석";
+            else if(ra.value == "premium") target.value= target.value+" 프리미엄 일반석";
+            else if(ra.value == "business") target.value= target.value+" 비즈니스석";
+            else if(ra.value == "first") target.value= target.value+" 일등석";
+            if( parseInt(ad)+parseInt(ki)+parseInt(ba) > 9 ){
+                alert('예약 가능 최대 인원은 9명입니다.');
+                target.value=" 성인1명 / 일반석";
+            }
+            else if(ba>ad){
+                alert('유아는 성인 인원 내에서 선택 가능합니다.');
+                target.value=" 성인1명 / 일반석";
+            }
+        }
+    </script>
+</head>
+<body>
+    <section id="content1">
+        <div id="insidebox">
+            <h1>어디로 떠나고 싶으신가요?</h1>
+            <ul>
+                <li>
+                    <input type="radio" name="inside" id="pak" checked>
+                    <label for="pak">패키지</label>
+                    <div class="insidecontent">
+                        <select name="pakdest" id="pakdest" onchange="destcategory(this)">
+                            <option disabled selected>어디로</option>
+                            <option value="jp">일본</option>
+                            <option value="uk">영국</option>
+                            <option value="us">미국</option>
+                        </select>
+                        <select name="dests" id="dests">
+                            <option>떠나시나요?</option>
+                        </select>
+                        <input type="date" name="goday" id="goday" placeholder="출발예정일">
+                        <input type="button" value="패키지 검색하기" id="searchbtn">
+                    </div>
+                </li>
+                <li>
+                    <input type="radio" name="inside" id="air">
+                    <label for="air">항공</label>
+                    <div class="insidecontent">
+
+                        <div id="airtickets">
+                            
+                            <input type="radio" name="airticket" id="shuttle" checked>
+                            <label for="shuttle">왕복</label>
+                            <div id="shuttledate">
+                                <input type="date" id="go">
+                                <p><i class="fa-solid fa-arrow-up-long"></i><i class="fa-solid fa-arrow-down-long"></i></p>
+                                <input type="date" id="come">
+                            </div>
+                            <input type="radio" name="airticket" id="single">
+                            <label for="single">편도</label>
+                            <div id="singledate">
+                                <input type="date" id="goaway">
+                            </div>
+                        </div>
+                        
+                        <div id="start">
+                            <select name="airport" id="airport" onchange="airportcategory(this)">
+                                <option>출발국가</option>
+                            </select>
+                            <select name="airports" id="airports">
+                                <option>지역</option>
+                            </select>
+                            <p><i class="fa-solid fa-arrow-up-long"></i><i class="fa-solid fa-arrow-down-long"></i></p>
+                        </div>
+                        <div id="end">
+                            <select name="airport" id="airport" onchange="airportcategory(this)">
+                                <option>도착국가</option>
+                            </select>
+                            <select name="airports" id="airports">
+                                <option>지역</option>
+                            </select>
+                        </div>
+
+                        <div id="seat">
+                            <input type="button" id="seatbtn" value=" 성인1명 / 일반석">
+                            <div id="seatbox">
+                                <h2>인원</h2>
+                                <p>예약 가능 최대 인원은 9명이며,<br>유아는 성인 인원 내에서 선택 가능합니다.
+                                <br>소아 : 만 2세~12세미만
+                                <br>유아 : 만 2세 미만</p>
+
+                                <div>
+                                    <label for="adult">성인</label>
+                                    <input type="number" id="adult" value="1" min="0" max="9">
+                                </div>
+                                <div>
+                                    <label for="kid">소아</label>
+                                    <input type="number" id="kid" value="0" min="0" max="9">
+                                </div>
+                                <div>
+                                    <label for="baby">유아</label>
+                                    <input type="number" id="baby" value="0" min="0" max="9">
+                                </div>
+                                
+                                <div>
+                                    <input type="radio" name="seatlv" id="normal" value="normal" checked>
+                                    <label for="normal">일반석</label>
+                                </div>
+                                <div>
+                                    <input type="radio" name="seatlv" id="premium" value="premium">
+                                    <label for="premium">프리미엄 일반석</label>
+                                </div>
+                                <div>
+                                    <input type="radio" name="seatlv" id="business" value="business">
+                                    <label for="business">비즈니스석</label>
+                                </div>
+                                <div>
+                                    <input type="radio" name="seatlv" id="first" value="first">
+                                    <label for="first">일등석</label>
+                                </div>
+                                <input type="button" value="선택" onclick="seatclick(adult.value,kid.value,baby.value)">
+                            </div>
+                        </div>
+
+                        <input type="button" value="항공권 검색" id="airbtn">
+                    </div>
+                </li>
+                <li>
+                    <input type="radio" name="inside" id="hotel">
+                    <label for="hotel">호텔</label>
+                    <div class="insidecontent">
+                        <select name="hoteldest" id="hoteldest" onchange="hotelcategory(this)">
+                            <option disabled selected>어디로</option>
+                        </select>
+                        <select name="hoteldests" id="hoteldests">
+                            <option>떠나시나요?</option>
+                        </select>
+                        <div id="hoteldate">
+                            <input type="date" id="staystart">
+                            <p>~</p>
+                            <input type="date" id="stayend">
+                        </div>
+                        <div id="room">
+                            <input type="button" id="roombtn" value=" 객실1 성인1명">
+                            <div id="roombox">
+                                <div>
+                                    <label for="rooms">객실</label>
+                                    <input type="number" id="rooms" value="1" min="0" max="9">
+                                </div>
+                                <div>
+                                    <label for="adult">성인</label>
+                                    <input type="number" id="adult" value="0" min="0" max="9">
+                                </div>
+                                <div>
+                                    <label for="kid">아동</label>
+                                    <input type="number" id="kid" value="0" min="0" max="9">
+                                </div>
+                                <p>아동: 0세~만17세이하.</p>
+                                
+                                <input type="button" value="선택" onclick="roomclick(rooms.value,adult.value,kid.value)">
+                            </div>
+                        </div>
+                        <input type="button" value="숙소 검색" id="hotelbtn">
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+</body>
+</html>
